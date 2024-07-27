@@ -28153,6 +28153,8 @@ with pkgs;
 
   gnome-icon-theme = callPackage ../data/icons/gnome-icon-theme { };
 
+  gnome-icon-theme-symbolic = callPackage ../data/icons/gnome-icon-theme-symbolic { };
+
   go-font = callPackage ../data/fonts/go-font { };
 
   goudy-bookletter-1911 = callPackage ../data/fonts/goudy-bookletter-1911 { };
