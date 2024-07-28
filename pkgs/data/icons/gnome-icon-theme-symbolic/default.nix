@@ -1,4 +1,4 @@
-{ stdenv, coreutils, inkscape, iconnamingutils, pkg-config, lib, fetchurl }:
+{ stdenv, inkscape, iconnamingutils, pkg-config, lib, fetchurl, gtk3 }:
 stdenv.mkDerivation rec {
   pname = "gnome-icon-theme-symbolic";
   version = "3.12.0";
@@ -9,12 +9,13 @@ stdenv.mkDerivation rec {
   };
 
   # A hack to patch out the gtk-update-icon-cache, which fails due to the icon pack not having a theme index.
-  env.GTK_UPDATE_ICON_CACHE = "${coreutils}/bin/true";
+  env.GTK_UPDATE_ICON_CACHE = "${gtk3}/bin/gtk-update-icon-cache --ignore-theme-index";
 
-  nativeBuildInputs =  [
-    inkscape
-    iconnamingutils
-    pkg-config
+  nativeBuildInputs = [
+    inkscape # For manipulating SVGs
+    iconnamingutils # For naming the resulting icons
+    pkg-config # REquired for package discovery
+    gtk3 # Needed for updating the icon cache
   ];
 
   dontDropIconThemeCache = true;
